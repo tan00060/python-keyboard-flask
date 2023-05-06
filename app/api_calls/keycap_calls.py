@@ -11,11 +11,9 @@ CONNECTION_PARAMETERS = {
                           'port': os.getenv("SQL_DATABASE_PORT")
 }
 
-def get_all_switch():
+def get_all_keycap():
     with psycopg2.connect(**CONNECTION_PARAMETERS) as conn:
         with conn.cursor() as curs:
-            curs.execute('SELECT id, name, switch_type_id FROM switch;')
+            curs.execute('SELECT id, name, keycap_profile_id FROM keycap;')
             res = curs.fetchall()
-            # for owner in owners:
-            #     print(owner)
             return res
