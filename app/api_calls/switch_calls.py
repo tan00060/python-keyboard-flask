@@ -33,7 +33,6 @@ def create_switch(data):
             except Exception as e:
                 return "Failed to create switch", 400
 
-
 def get_switch_by_id(switch_id):
     with psycopg2.connect(**CONNECTION_PARAMETERS) as conn:
         with conn.cursor() as curs:
@@ -70,3 +69,23 @@ def delete_switch(switch_id):
                     return "Deleted Switch", 200
             except Exception as e:
                 return "Failed to create switch", 400
+
+def update_by_id_switch(switch_id, body):
+    with psycopg2.connect(**CONNECTION_PARAMETERS) as conn:
+        with conn.cursor() as curs:
+            try:
+                res = get_switch_by_id(switch_id)
+                print(res)
+                if res[-1] == 404:
+                    return "Failed to update switch", 400
+                else:
+                    curs.execute("""
+                                UPDATE switch SET name=(%(name)s) WHERE ID =(%(switch_id)s)
+                                """,
+                                {
+                                'switch_id': switch_id,
+                                'name': body["name"]
+                                })
+                    return "Updated Switch", 200
+            except Exception as e:
+                return "Failed to update switch", 400
