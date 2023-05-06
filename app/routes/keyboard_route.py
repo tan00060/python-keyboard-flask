@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from ..api.keyboard import get_all_keyboard
+from ..api.keyboard_api import get_all_keyboard
 from app import app
 
 
