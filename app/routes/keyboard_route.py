@@ -1,10 +1,7 @@
 from flask import Flask, request, jsonify
+from ..api.keyboard import get_all_keyboard
+from app import app
 
-# from app.config import Config
-from routes.keyboard import get_all_keyboard
-
-app = Flask(__name__)
-# app.config.from_object(Config)
 
 @app.route('/keyboard', methods=["GET", "POST"])
 def keyboard():
@@ -12,7 +9,3 @@ def keyboard():
         return get_all_keyboard()
     else:
         None
-
-
-
-
