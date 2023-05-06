@@ -17,3 +17,15 @@ def get_all_switch():
             curs.execute('SELECT id, name, switch_type_id FROM switch;')
             res = curs.fetchall()
             return res
+
+def create_switch(data):
+    with psycopg2.connect(**CONNECTION_PARAMETERS) as conn:
+        with conn.cursor() as curs:
+            # curs.execute(f'INSERT INTO {table}{columns} VALUES{values};')
+            curs.execute("""
+                         INSERT INTO switch (name, switch_type_id)
+                         VALUES (%(name)s, %(switch_type_id)s)
+                         """,
+                         {'name': data["name"],
+                        'switch_type_id': data["switch_type_id"]
+                         })

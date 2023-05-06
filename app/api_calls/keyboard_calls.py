@@ -19,3 +19,14 @@ def get_all_keyboard():
             # for owner in owners:
             #     print(owner)
             return res
+
+def get_by_id_keyboard(keyboard_id):
+    with psycopg2.connect(**CONNECTION_PARAMETERS) as conn:
+        with conn.cursor() as curs:
+            curs.execute("""
+                         SELECT id, name, keyboard_type_id, switch_id, keycap_id FROM keyboard
+                         WHERE id = %(keyboard_id)s
+                         """,
+                         {'keyboard_id': keyboard_id})
+            res = curs.fetchall()
+            return res
