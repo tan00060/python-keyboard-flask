@@ -12,6 +12,7 @@ sqlalchemy = "*"
 flask-sqlalchemy = "*"
 alembic = "*"
 flask-migrate = "*"
+flask-cors = "*"
 
 [dev-packages]
 pylint = "*"
