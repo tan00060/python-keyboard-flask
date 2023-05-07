@@ -21,6 +21,7 @@ def get_by_id_switch(switch_id):
 def create_new_switch():
     data = request.json
     switch = Switch(
+        # can also do Switch(**data)
         switch_name = data["switch_name"],
         switch_type_id = data["switch_type_id"]
     )
