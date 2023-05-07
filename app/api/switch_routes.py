@@ -32,7 +32,6 @@ def create_new_switch():
         return switch_json
     except SQLAlchemyError as e:
         error = str(e.__dict__['orig'])
-        print(error)
         db.session.rollback()
         return {'errors': ['An error occurred while creating data']}, 500
 
