@@ -1,5 +1,4 @@
 from flask import Blueprint, request, jsonify
-from ..api_calls.switch_calls import get_all_switch, create_switch, delete_switch, get_switch_by_id, update_by_id_switch
 from ..models.db import db
 from ..models.switch_type import SwitchType
 from ..models.switch import Switch
