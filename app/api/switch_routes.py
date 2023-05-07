@@ -9,8 +9,11 @@ switch_routes = Blueprint('switch', __name__)
 
 @switch_routes.route('/switch', methods=["GET"])
 def switch():
-    switches = Switch.query.all()
-    return {"switches": [switch.to_dict() for switch in switches]}
+    switches = db.session.query(Switch, SwitchType).join(SwitchType, Switch.switch_type_id == SwitchType.id).all()
+    print(switches)
+    data_list = [{"id": switch.Switch.id,"Switch": switch.Switch.switch_name, "SwitchType": switch.SwitchType.switch_type} for switch in switches]
+
+    return data_list
 
 @switch_routes.route('/switch/<int:switch_id>', methods=["GET"])
 def get_by_id_switch(switch_id):

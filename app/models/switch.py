@@ -13,6 +13,6 @@ class Switch(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
-            'name': self.switch_name,
+            'switch_name': self.switch_name,
             'switch_type_id': self.switch_type_id
         }
