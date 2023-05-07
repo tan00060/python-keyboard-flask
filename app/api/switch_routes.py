@@ -12,10 +12,12 @@ def switch():
     switch_list = [{"id": switch.Switch.id,"Switch": switch.Switch.switch_name, "SwitchType": switch.SwitchType.switch_type} for switch in switches]
     return switch_list
 
+
 @switch_routes.route('/switch/<int:switch_id>', methods=["GET"])
 def get_by_id_switch(switch_id):
         switch = Switch.query.get(switch_id)
         return switch.to_dict()
+
 
 @switch_routes.route('/switch', methods=["POST"])
 def create_new_switch():
@@ -35,21 +37,36 @@ def create_new_switch():
         db.session.rollback()
         return {'errors': ['An error occurred while creating data']}, 500
 
-# @switch_routes.route('/switch/<switch_id>', methods=["DELETE"])
-# def delete_by_id_switch(switch_id):
-#     if request.method == "DELETE":
-#         res = delete_switch(switch_id)
-#         print(res)
-#         return res
-#     else:
-#         None
 
-# @switch_routes.route('/switch/<switch_id>', methods=["PUT"])
-# def update_switch(switch_id):
-#     if request.method == "PUT":
-#         res = update_by_id_switch(switch_id, request.json)
-#         print(res)
-#         return res
-#     else:
-#         None
+@switch_routes.route('/switch/<switch_id>', methods=["DELETE"])
+def delete_by_id_switch(switch_id):
+    switch = Switch.query.get(switch_id)
+    if switch:
+        db.session.delete(switch)
+        db.session.commit()
+        return {'message': f'switch Id: {switch_id} was successfully deleted'}
+    else:
+        return {'errors': [f'Switch Id: {switch_id} was not found']}
+
+
+@switch_routes.route('/switch/<switch_id>', methods=["PUT"])
+def update_switch(switch_id):
+    try:
+        switch = Switch.query.get(switch_id)
+        if not switch:
+            return jsonify({'error': 'Switch not found'}), 404
+        
+        data = request.json
+
+        if 'switch_name' in data:
+            switch.switch_name = data["switch_name"]
+
+        db.session.commit()
+        return {'message': f'switch Id: {switch_id} was successfully updated'}
+
+    except SQLAlchemyError as e:
+        error = str(e.__dict__['orig'])
+        db.session.rollback()
+        return {'errors': ['An error occurred while updating data']}, 500
+
 
