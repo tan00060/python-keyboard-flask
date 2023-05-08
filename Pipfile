@@ -13,6 +13,8 @@ flask-sqlalchemy = "*"
 alembic = "*"
 flask-migrate = "*"
 flask-cors = "*"
+email-validator = "*"
+flask-login = "*"
 
 [dev-packages]
 pylint = "*"

@@ -1,6 +1,15 @@
 CREATE USER keyboard WITH PASSWORD 'password';
 CREATE DATABASE keyboard WITH OWNER keyboard
 
+CREATE TABLE users (
+  id SERIAL,
+  username VARCHAR(50) NOT NULL,
+  email VARCHAR(250) NOT NULL,
+  password_hashed VARCHAR(50) NOT NULL,
+  PRIMARY KEY (id)
+);
+
+
 CREATE TABLE keyboard_type (
   id SERIAL,
   name VARCHAR(50) NOT NULL,
@@ -46,3 +55,7 @@ CREATE TABLE keyboard (
   FOREIGN KEY (switch_id) REFERENCES switch(id),
   FOREIGN KEY (keycap_id) REFERENCES keycap(id)
 );
+
+
+ALTER TABLE keyboard ADD FOREIGN KEY (`user_id`) REFERENCES users(`id`);
+ALTER TABLE keyboard ADD user_id INTEGER NOT NULL;
