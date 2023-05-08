@@ -15,6 +15,7 @@ from .api.keycap_profile_routes import keycap_profile_routes
 from .api.switch_routes import switch_routes
 from .api.switch_type_routes import switch_type_routes
 from .api.auth_routes import auth_routes
+from .api.signup_routes import signup_routes
 
 from .models.user import User
 
@@ -37,6 +38,7 @@ app.register_blueprint(keycap_profile_routes, url_prefix="/api")
 app.register_blueprint(switch_routes, url_prefix="/api")
 app.register_blueprint(switch_type_routes, url_prefix="/api")
 app.register_blueprint(auth_routes, url_prefix="/api")
+app.register_blueprint(signup_routes, url_prefix="/api")
 
 db.init_app(app)
 Migrate(app, db)

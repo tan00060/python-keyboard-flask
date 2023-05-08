@@ -28,4 +28,4 @@ class User(db.Model, UserMixin):
 
 # find better way to check hash so i dont get erros
     def check_password(self, password):
-        return self.password_hashed == password
+        return check_password_hash(self.password, password)
