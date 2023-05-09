@@ -15,6 +15,7 @@ flask-migrate = "*"
 flask-cors = "*"
 email-validator = "*"
 flask-login = "*"
+flask-swagger-ui = "*"
 
 [dev-packages]
 pylint = "*"

@@ -5,6 +5,7 @@ from flask_migrate import Migrate
 from flask_cors import CORS
 from flask_login import LoginManager
 from flask_wtf.csrf import CSRFProtect, generate_csrf
+from flask_swagger_ui import get_swaggerui_blueprint
 
 
 from .models.db import db
@@ -16,6 +17,8 @@ from .api.switch_routes import switch_routes
 from .api.switch_type_routes import switch_type_routes
 from .api.auth_routes import auth_routes
 from .api.signup_routes import signup_routes
+
+from .api.swagger_routes import swagger
 
 from .models.user import User
 
@@ -31,6 +34,8 @@ def load_user(id):
     return User.query.get(int(id))
 
 
+
+app.register_blueprint(swagger())
 app.register_blueprint(keyboard_routes, url_prefix="/api")
 app.register_blueprint(keyboard_type_routes, url_prefix="/api")
 app.register_blueprint(keycap_routes, url_prefix="/api")
