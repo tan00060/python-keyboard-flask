@@ -4,6 +4,8 @@ from ..models.db import db
 from ..form.login_form import LoginForm
 from flask_login import current_user, login_user, logout_user, login_required
 
+#maybe add jwt token??
+
 auth_routes = Blueprint('auth', __name__)
 
 @auth_routes.route('/login', methods=['POST'])

@@ -1,325 +1,265 @@
-{
-  "openapi": "3.0.0",
-  "info": {
-    "title": "python-flask-keyboard-api",
-    "version": "1.0.0"
-  },
-  "servers": [
-    {
-      "url": "http://localhost:5000"
-    }
-  ],
-  "paths": {
-    "/api/signup": {
-      "post": {
-        "tags": [
-          "default"
-        ],
-        "summary": "signup",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "example": {
-                  "username": "mao",
-                  "email": "maomao7@gmail.com",
-                  "password": "password"
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      }
-    },
-    "/api/login": {
-      "post": {
-        "tags": [
-          "default"
-        ],
-        "summary": "login",
-        "requestBody": {
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "email": {
-                    "type": "string",
-                    "example": "test1@gmail.com"
-                  },
-                  "password": {
-                    "type": "string",
-                    "example": "password"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      }
-    },
-    "/api/logout": {
-      "post": {
-        "tags": [
-          "default"
-        ],
-        "summary": "logout",
-        "requestBody": {
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "object",
-                "properties": {}
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      }
-    },
-    "/api/keyboard": {
-      "get": {
-        "tags": [
-          "default"
-        ],
-        "summary": "get-keyboard",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "default"
-        ],
-        "summary": "post-keyboard",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "example": {
-                  "keyboard_name": "keyboard_name",
-                  "keyboard_type_id": 1,
-                  "switch_id": 35,
-                  "keycap_id": 2
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      }
-    },
-    "/api/keyboard/32": {
-      "get": {
-        "tags": [
-          "default"
-        ],
-        "summary": "get-keyboard-by-id",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      }
-    },
-    "/api/switch": {
-      "get": {
-        "tags": [
-          "default"
-        ],
-        "summary": "get-switch",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "default"
-        ],
-        "summary": "create-switch",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "example": {
-                  "switch_name": "keyboard_name",
-                  "switch_type_id": 1
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      }
-    },
-    "/api/switch/35": {
-      "get": {
-        "tags": [
-          "default"
-        ],
-        "summary": "get-switch-by-id",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      }
-    },
-    "/api/keycap": {
-      "get": {
-        "tags": [
-          "default"
-        ],
-        "summary": "get-keycap",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "default"
-        ],
-        "summary": "post-keycap",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "example": {
-                  "keycap_name": "keyboard_name",
-                  "keycap_profile_id": 1
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      }
-    },
-    "/api/keycap/2": {
-      "get": {
-        "tags": [
-          "default"
-        ],
-        "summary": "get-keycap-by-id",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "default"
-        ],
-        "summary": "put-keycap",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "example": {
-                  "keycap_name": "nice",
-                  "keycap_profile_id": 2
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "default"
-        ],
-        "summary": "delete-keycap-by-id",
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {}
-            }
-          }
-        }
-      }
-    }
-  }
-}
+openapi: 3.0.0
+info:
+  title: python-flask-keyboard-api
+  version: 1.0.0
+servers:
+  - url: http://localhost:5000
+tags:
+  - name: auth
+  - name: keyboard
+  - name: switch
+  - name: keycap
+paths:
+  /api/signup:
+    post:
+      tags:
+        - auth
+      summary: signup
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                username: mao
+                email: maomao7@gmail.com
+                password: password
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/login:
+    post:
+      tags:
+        - auth
+      summary: login
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: test1@gmail.com
+                password:
+                  type: string
+                  example: password
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/logout:
+    post:
+      tags:
+        - auth
+      summary: logout
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties: {}
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/keyboard:
+    get:
+      tags:
+        - keyboard
+      summary: get-keyboard
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      tags:
+        - keyboard
+      summary: post-keyboard
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                keyboard_name: keyboard_name
+                keyboard_type_id: 1
+                switch_id: 35
+                keycap_id: 2
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/keyboard/32:
+    get:
+      tags:
+        - keyboard
+      summary: get-keyboard-by-id
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/keyboard/35:
+    put:
+      tags:
+        - keyboard
+      summary: update-keyboard-by-id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                keyboard_name: name
+                keyboard_type_id: 1
+                switch_id: 35
+                keycap_id: 2
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/keyboard/34:
+    delete:
+      tags:
+        - keyboard
+      summary: delete-keyboard-by-id
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/switch:
+    get:
+      tags:
+        - switch
+      summary: get-switch
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      tags:
+        - switch
+      summary: create-switch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                switch_name: keyboard_name
+                switch_type_id: 1
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/switch/35:
+    get:
+      tags:
+        - switch
+      summary: get-switch-by-id
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - switch
+      summary: delete-switch-by-id
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/switch/39:
+    put:
+      tags:
+        - switch
+      summary: update-switch-by-id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                switch_name: hgh
+                switch_type_id: 1
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/keycap:
+    get:
+      tags:
+        - keycap
+      summary: get-keycap
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    post:
+      tags:
+        - keycap
+      summary: post-keycap
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                keycap_name: keyboard_name
+                keycap_profile_id: 1
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /api/keycap/2:
+    get:
+      tags:
+        - keycap
+      summary: get-keycap-by-id
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    put:
+      tags:
+        - keycap
+      summary: update-keycap-by-id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                keycap_name: nice
+                keycap_profile_id: 2
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - keycap
+      summary: delete-keycap-by-id
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}

@@ -13,6 +13,5 @@ def get_switch_type():
         switch_type_list = [{"id": type.id, "switch_type": type.switch_type} for type in switch_types]
         return switch_type_list
     except SQLAlchemyError as e:
-        error = str(e.__dict__['orig'])
         db.session.rollback()
-        return {'errors': ['An error occurred while getting data']}, 500    
+        return {'errors': ['An error occurred']}, 500
