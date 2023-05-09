@@ -28,7 +28,6 @@ def keyboard():
 def get_keyboard_by_id(keyboard_id):
     user_id = session['id']
     keyboard = Keyboard.query.get(keyboard_id)
-
     if keyboard:
         if keyboard.user_id == user_id:
             return keyboard.to_dict(), 200 

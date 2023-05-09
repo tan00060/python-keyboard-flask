@@ -8,9 +8,12 @@ from sqlalchemy.exc import SQLAlchemyError
 
 switch_routes = Blueprint('switch', __name__)
 
+
 @switch_routes.route('/switch', methods=["GET"])
+@login_required
 def switch():
-    switches = db.session.query(Switch, SwitchType).join(SwitchType, Switch.switch_type_id == SwitchType.id).all()
+    user_id = session['id']  # Get the user_id from the session
+    switches = db.session.query(Switch, SwitchType).join(SwitchType, Switch.switch_type_id == SwitchType.id).filter(Switch.user_id == user_id).all()
     switch_list = [{"id": switch.Switch.id,"Switch": switch.Switch.switch_name, "SwitchType": switch.SwitchType.switch_type} for switch in switches]
     return switch_list
 

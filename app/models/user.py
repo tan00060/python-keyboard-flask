@@ -15,8 +15,8 @@ class User(db.Model, UserMixin):
             "id": self.id,
             "username": self.username,
             "email": self.email,
-            "keyboards": [keyboard.id for keyboard in self.keyboards],
-            "keycaps": [keycap.id for keycap in self.keycaps],
+            "keyboards": [{"id": keyboard.id, "name": keyboard.keyboard_name} for keyboard in self.keyboards],
+            "keycaps": [{"id": keycap.id, "name": keycap.keycap_name} for keycap in self.keycaps],
             "switches": [{"id": switch.id, "name": switch.switch_name} for switch in self.switches]
         }
     
