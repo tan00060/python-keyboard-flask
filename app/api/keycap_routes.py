@@ -11,9 +11,23 @@ keycap_routes = Blueprint('keycap', __name__)
 @keycap_routes.route('/keycap', methods=["GET"])
 @login_required
 def get_keycaps():
+    user_id = session['id']
     keycaps = db.session.query(Keycap, KeycapProfile).join(KeycapProfile, Keycap.keycap_profile_id == KeycapProfile.id).filter(Keycap.user_id == user_id).all()
     keycap_list = [{"id": keycap.Keycap.id, "keycap_name": keycap.Keycap.keycap_name, "keycap_profile_name": keycap.KeycapProfile.keycap_profile_name} for keycap in keycaps]
     return keycap_list
+
+@keycap_routes.route('/keycap/<int:keycap_id>', methods=["GET"])
+@login_required
+def get_by_id_keycaps(keycap_id):
+    user_id = session['id']
+    keycap = Keycap.query.get(keycap_id)
+    if keycap:
+        if keycap.user_id == user_id:
+            return keycap.to_dict(), 200 
+        else:
+            return {'errors': [f'keycaps ID: {keycap_id} was not found']}, 404 
+    else:
+        return {'errors': [f'keycaps ID: {keycap_id} was not found']}, 404
 
 @keycap_routes.route('/keycap', methods=["POST"])
 @login_required

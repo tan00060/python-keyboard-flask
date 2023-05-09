@@ -20,9 +20,15 @@ def switch():
 
 @switch_routes.route('/switch/<int:switch_id>', methods=["GET"])
 def get_by_id_switch(switch_id):
-        switch = Switch.query.get(switch_id)
-        return switch.to_dict()
-
+    switch = Switch.query.get(switch_id)
+    user_id = session['id']
+    if switch:
+        if switch.user_id == user_id:
+            return switch.to_dict(), 200 
+        else:
+            return {'errors': [f'switch ID: {switch_id} was not found']}, 404 
+    else:
+        return {'errors': [f'switch ID: {switch_id} was not found']}, 404
 
 @switch_routes.route('/switch', methods=["POST"])
 def create_new_switch():
