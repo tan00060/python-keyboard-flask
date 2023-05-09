@@ -6,8 +6,10 @@ class Switch(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     switch_name = db.Column(db.String(50), nullable=False, unique=False)
     switch_type_id = db.Column(db.Integer, db.ForeignKey("switch_type.id"), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False, unique=False)
 
     switch_type = db.relationship("SwitchType")
+    user = db.relationship("User", backref="switches")
 
 
     def to_dict(self):

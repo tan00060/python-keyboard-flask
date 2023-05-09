@@ -1,4 +1,4 @@
-CREATE USER keyboard WITH PASSWORD 'password';
+CREATE USER keyboard WITH PASSWORD "password";
 CREATE DATABASE keyboard WITH OWNER keyboard
 
 CREATE TABLE users (
@@ -57,5 +57,11 @@ CREATE TABLE keyboard (
 );
 
 
-ALTER TABLE keyboard ADD FOREIGN KEY (`user_id`) REFERENCES users(`id`);
+ALTER TABLE keyboard ADD FOREIGN KEY ("user_id") REFERENCES "user" (id);
 ALTER TABLE keyboard ADD user_id INTEGER NOT NULL;
+
+ALTER TABLE keycap ADD FOREIGN KEY ("user_id") REFERENCES "user" (id);
+ALTER TABLE keycap ADD user_id INTEGER NOT NULL;
+
+ALTER TABLE switch ADD FOREIGN KEY ("user_id") REFERENCES "user" (id);
+ALTER TABLE switch ADD user_id INTEGER NOT NULL;

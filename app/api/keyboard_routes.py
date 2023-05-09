@@ -43,6 +43,19 @@ def create_keyboard():
     data = request.json
     user_id = session['id']
     new_keyboard = Keyboard(user_id=user_id, **data)
+    available_switches = Switch.query.filter(Switch.user_id == user_id).all()
+    available_keycaps = Keycap.query.filter(Keycap.user_id == user_id).all()
+
+    switch_id = data.get('switch_id')
+    switch_exists = any(switch.id == switch_id for switch in available_switches)
+    if not switch_exists:
+        return {'errors': "invalid data"}, 400
+
+    keycap_id = data.get('keycap_id')
+    keycap_exists = any(keycap.id == keycap_id for keycap in available_keycaps)
+    if not keycap_exists:
+        return {'errors': "invalid data"}, 400
+
     try:
         db.session.add(new_keyboard)
         db.session.commit()

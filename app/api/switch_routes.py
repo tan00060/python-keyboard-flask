@@ -1,8 +1,10 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, session
 from ..models.db import db
 from ..models.switch_type import SwitchType
 from ..models.switch import Switch
+from flask_login import current_user, login_user, logout_user, login_required
 from sqlalchemy.exc import SQLAlchemyError
+
 
 switch_routes = Blueprint('switch', __name__)
 
@@ -21,9 +23,11 @@ def get_by_id_switch(switch_id):
 
 @switch_routes.route('/switch', methods=["POST"])
 def create_new_switch():
+    user_id = session['id']
     data = request.json
     switch = Switch(
         # can also do Switch(**data)
+        user_id = user_id,
         switch_name = data["switch_name"],
         switch_type_id = data["switch_type_id"]
     )
