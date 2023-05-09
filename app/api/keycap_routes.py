@@ -45,4 +45,53 @@ def create_keycaps():
         db.session.rollback()
         return {'errors': ['An error occurred while updating data']}, 500
 
+@keycap_routes.route('/keycap/<int:keycap_id>', methods=["PUT"])
+@login_required
+def update_keycaps(keycap_id):
+    user_id = session['id']
+    data = request.json
+    keycap = Keycap.query.get(keycap_id)
+
+    if not keycap:
+        return jsonify({'error': 'Keyboard not found'}), 404
+    
+    if keycap.user_id != user_id:
+        return jsonify({'error': 'Keyboard not found'}), 404
+    
+    if 'keycap_name' in data:
+        keycap.keycap_name = data["keycap_name"]
+    if 'keycap_profile_id' in data:
+        keycap.keycap_profile_id = data["keycap_profile_id"]
+
+    try:
+        db.session.add(keycap)
+        db.session.commit()
+        return keycap.to_dict(), 200
+    except SQLAlchemyError as e:
+        error = str(e.__dict__['orig'])
+        db.session.rollback()
+        return {'errors': ['An error occurred while updating data']}, 500
+
+@keycap_routes.route('/keycap/<int:keycap_id>', methods=["DELETE"])
+@login_required
+def delete_keycaps(keycap_id):
+    user_id = session['id']
+    keycap = Keycap.query.get(keycap_id)
+    try:
+
+        if keycap:
+            if keycap.user_id == user_id:
+                db.session.delete(keycap)
+                db.session.commit()
+                return jsonify({'message': f'keycap ID: {keycap_id} was successfully deleted'}), 200
+            else:
+                return jsonify({'error': 'keycap not found'}), 404
+        else:
+            return jsonify({'errors': [f'keycap ID: {keycap_id} was not found']}), 404
+    except SQLAlchemyError as e:
+        error_msg = 'An error occurred while deleting data, check if it is not connected to another item'
+        db.session.rollback()
+        return jsonify({'errors': [error_msg]}), 500
+
+
 
