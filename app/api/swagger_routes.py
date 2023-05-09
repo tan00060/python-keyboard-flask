@@ -5,10 +5,10 @@ from sqlalchemy.exc import SQLAlchemyError
 from flask_swagger_ui import get_swaggerui_blueprint
 
 swagger_routes = Blueprint('swagger', __name__)
-
+import os
 
 SWAGGER_URL = '/api/swagger'  # URL for exposing Swagger UI (without trailing '/')
-API_URL = 'http://petstore.swagger.io/v2/swagger.json'  # Our API url (can of course be a local resource)
+API_URL = '../../static/swagger.json'  # Our API url (can of course be a local resource)
 
 # Call factory function to create our blueprint
 def swagger():
