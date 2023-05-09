@@ -6,7 +6,7 @@ from ..models.keyboard_type import KeyboardType
 from ..models.keyboard import Keyboard
 from ..models.user import User
 from sqlalchemy.exc import SQLAlchemyError
-from flask_login import current_user, login_user, logout_user, login_required
+from flask_login import login_required
 
 keyboard_routes = Blueprint('keyboard', __name__)
 

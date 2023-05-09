@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify, session
 from ..models.db import db
 from ..models.switch_type import SwitchType
 from ..models.switch import Switch
-from flask_login import current_user, login_user, logout_user, login_required
+from flask_login import login_required
 from sqlalchemy.exc import SQLAlchemyError
 
 

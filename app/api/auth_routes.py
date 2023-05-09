@@ -1,8 +1,7 @@
 from flask import Blueprint, jsonify, session, request
 from ..models.user import User
-from ..models.db import db
 from ..form.login_form import LoginForm
-from flask_login import current_user, login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required
 
 #maybe add jwt token??
 
